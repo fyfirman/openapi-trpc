@@ -81,7 +81,10 @@ export function generateOpenAPIDocumentFromTRPCRouter<R extends Router<any>>(
         operationInfo[key] = value as any
       }
     }
-    if (procDef.query) {
+    // Support both tRPC v10 (procDef.query) and v11+ (procDef.type)
+    const isQuery = procDef.query || (procDef as any).type === 'query'
+    
+    if (isQuery) {
       paths[key] = {
         get: processOperation(
           {
