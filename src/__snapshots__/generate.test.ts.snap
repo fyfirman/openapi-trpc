@@ -145,14 +145,22 @@ Object {
           "content": Object {
             "application/json": Object {
               "schema": Object {
-                "additionalProperties": false,
-                "description": "Input for createGreeting",
                 "properties": Object {
-                  "name": Object {
-                    "description": "The name to greet",
-                    "type": "string",
+                  "json": Object {
+                    "additionalProperties": false,
+                    "description": "Input for createGreeting",
+                    "properties": Object {
+                      "name": Object {
+                        "description": "The name to greet",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
                   },
                 },
+                "required": Array [
+                  "json",
+                ],
                 "type": "object",
               },
             },

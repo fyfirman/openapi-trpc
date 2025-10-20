@@ -116,7 +116,13 @@ export function generateOpenAPIDocumentFromTRPCRouter<R extends Router<any>>(
             requestBody: {
               content: {
                 'application/json': {
-                  schema: inputSchema as any,
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      json: inputSchema as any,
+                    },
+                    required: ['json'],
+                  } as any,
                 },
               },
             },
