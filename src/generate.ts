@@ -202,6 +202,22 @@ function generateExample(schema: Record<string, unknown>): unknown {
   if (schema.enum && Array.isArray(schema.enum) && schema.enum.length > 0)
     return schema.enum[0]
 
+  if (schema.anyOf && Array.isArray(schema.anyOf)) {
+    const nonNull = (schema.anyOf as Record<string, unknown>[]).find(
+      (s) => s.type !== 'null' && Object.keys(s).length > 0,
+    )
+    if (nonNull) return generateExample(nonNull)
+    return generateExample(schema.anyOf[0] as Record<string, unknown>)
+  }
+
+  if (schema.oneOf && Array.isArray(schema.oneOf)) {
+    const nonNull = (schema.oneOf as Record<string, unknown>[]).find(
+      (s) => s.type !== 'null' && Object.keys(s).length > 0,
+    )
+    if (nonNull) return generateExample(nonNull)
+    return generateExample(schema.oneOf[0] as Record<string, unknown>)
+  }
+
   switch (schema.type) {
     case 'string':
       return 'string'
@@ -223,6 +239,7 @@ function generateExample(schema: Record<string, unknown>): unknown {
       return result
     }
     default:
+      if (!schema.type && Object.keys(schema).length === 0) return {}
       return undefined
   }
 }
