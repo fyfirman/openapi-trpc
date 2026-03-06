@@ -15,9 +15,20 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": Object {},
+                },
                 "schema": Object {
-                  "additionalProperties": false,
-                  "properties": Object {},
+                  "properties": Object {
+                    "json": Object {
+                      "additionalProperties": false,
+                      "properties": Object {},
+                      "type": "object",
+                    },
+                  },
+                  "required": Array [
+                    "json",
+                  ],
                   "type": "object",
                 },
               },
@@ -46,9 +57,20 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": Object {},
+                },
                 "schema": Object {
-                  "additionalProperties": false,
-                  "properties": Object {},
+                  "properties": Object {
+                    "json": Object {
+                      "additionalProperties": false,
+                      "properties": Object {},
+                      "type": "object",
+                    },
+                  },
+                  "required": Array [
+                    "json",
+                  ],
                   "type": "object",
                 },
               },
@@ -85,15 +107,28 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": Object {
+                    "name": "string",
+                  },
+                },
                 "schema": Object {
-                  "additionalProperties": false,
                   "properties": Object {
-                    "name": Object {
-                      "type": "string",
+                    "json": Object {
+                      "additionalProperties": false,
+                      "properties": Object {
+                        "name": Object {
+                          "type": "string",
+                        },
+                      },
+                      "required": Array [
+                        "name",
+                      ],
+                      "type": "object",
                     },
                   },
                   "required": Array [
-                    "name",
+                    "json",
                   ],
                   "type": "object",
                 },
@@ -144,6 +179,11 @@ Object {
         "requestBody": Object {
           "content": Object {
             "application/json": Object {
+              "example": Object {
+                "json": Object {
+                  "name": "string",
+                },
+              },
               "schema": Object {
                 "properties": Object {
                   "json": Object {
@@ -210,9 +250,20 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": Object {},
+                },
                 "schema": Object {
-                  "additionalProperties": false,
-                  "properties": Object {},
+                  "properties": Object {
+                    "json": Object {
+                      "additionalProperties": false,
+                      "properties": Object {},
+                      "type": "object",
+                    },
+                  },
+                  "required": Array [
+                    "json",
+                  ],
                   "type": "object",
                 },
               },
@@ -275,15 +326,28 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": Object {
+                    "text": "string",
+                  },
+                },
                 "schema": Object {
-                  "additionalProperties": false,
                   "properties": Object {
-                    "text": Object {
-                      "type": "string",
+                    "json": Object {
+                      "additionalProperties": false,
+                      "properties": Object {
+                        "text": Object {
+                          "type": "string",
+                        },
+                      },
+                      "required": Array [
+                        "text",
+                      ],
+                      "type": "object",
                     },
                   },
                   "required": Array [
-                    "text",
+                    "json",
                   ],
                   "type": "object",
                 },
@@ -323,15 +387,28 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": Object {
+                    "name": "string",
+                  },
+                },
                 "schema": Object {
-                  "additionalProperties": false,
                   "properties": Object {
-                    "name": Object {
-                      "type": "string",
+                    "json": Object {
+                      "additionalProperties": false,
+                      "properties": Object {
+                        "name": Object {
+                          "type": "string",
+                        },
+                      },
+                      "required": Array [
+                        "name",
+                      ],
+                      "type": "object",
                     },
                   },
                   "required": Array [
-                    "name",
+                    "json",
                   ],
                   "type": "object",
                 },
@@ -383,11 +460,22 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": Array [],
+                },
                 "schema": Object {
-                  "items": Object {
-                    "type": "string",
+                  "properties": Object {
+                    "json": Object {
+                      "items": Object {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
                   },
-                  "type": "array",
+                  "required": Array [
+                    "json",
+                  ],
+                  "type": "object",
                 },
               },
             },
@@ -425,15 +513,28 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": Object {
+                    "name": "string",
+                  },
+                },
                 "schema": Object {
-                  "additionalProperties": false,
                   "properties": Object {
-                    "name": Object {
-                      "type": "string",
+                    "json": Object {
+                      "additionalProperties": false,
+                      "properties": Object {
+                        "name": Object {
+                          "type": "string",
+                        },
+                      },
+                      "required": Array [
+                        "name",
+                      ],
+                      "type": "object",
                     },
                   },
                   "required": Array [
-                    "name",
+                    "json",
                   ],
                   "type": "object",
                 },
@@ -485,24 +586,35 @@ Object {
           Object {
             "content": Object {
               "application/json": Object {
+                "example": Object {
+                  "json": undefined,
+                },
                 "schema": Object {
-                  "anyOf": Array [
-                    Object {
-                      "not": Object {},
-                    },
-                    Object {
-                      "additionalProperties": false,
-                      "properties": Object {
-                        "anOption": Object {
-                          "type": "string",
+                  "properties": Object {
+                    "json": Object {
+                      "anyOf": Array [
+                        Object {
+                          "not": Object {},
                         },
-                      },
-                      "required": Array [
-                        "anOption",
+                        Object {
+                          "additionalProperties": false,
+                          "properties": Object {
+                            "anOption": Object {
+                              "type": "string",
+                            },
+                          },
+                          "required": Array [
+                            "anOption",
+                          ],
+                          "type": "object",
+                        },
                       ],
-                      "type": "object",
                     },
+                  },
+                  "required": Array [
+                    "json",
                   ],
+                  "type": "object",
                 },
               },
             },

@@ -17,9 +17,15 @@ export function generateOpenAPIDocumentFromTRPCRouter<R extends Router<any>>(inR
 // @public (undocumented)
 export interface GenerateOpenAPIDocumentOptions<M extends OperationMeta> {
     // (undocumented)
+    description?: string;
+    // (undocumented)
     pathPrefix?: string;
     // (undocumented)
     processOperation?: (operation: OpenAPIV3.OperationObject, meta: M | undefined) => OpenAPIV3.OperationObject | void;
+    // (undocumented)
+    title?: string;
+    // (undocumented)
+    version?: string;
 }
 
 // Warning: (ae-forgotten-export) The symbol "allowedOperationKeys" needs to be exported by the entry point index.d.ts

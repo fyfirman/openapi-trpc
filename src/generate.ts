@@ -84,6 +84,9 @@ export function generateOpenAPIDocumentFromTRPCRouter<R extends Router<any>>(
     // Support both tRPC v10 (procDef.query) and v11+ (procDef.type)
     const isQuery = procDef.query || (procDef as any).type === 'query'
 
+    const inputExample = generateExample(inputSchema as Record<string, unknown>)
+    const wrappedExample = { json: inputExample }
+
     if (isQuery) {
       paths[key] = {
         get: processOperation(
@@ -97,7 +100,14 @@ export function generateOpenAPIDocumentFromTRPCRouter<R extends Router<any>>(
                 name: 'input',
                 content: {
                   'application/json': {
-                    schema: inputSchema as any,
+                    schema: {
+                      type: 'object',
+                      properties: {
+                        json: inputSchema as any,
+                      },
+                      required: ['json'],
+                    } as any,
+                    example: wrappedExample,
                   },
                 },
               },
@@ -123,6 +133,7 @@ export function generateOpenAPIDocumentFromTRPCRouter<R extends Router<any>>(
                     },
                     required: ['json'],
                   } as any,
+                  example: wrappedExample,
                 },
               },
             },
@@ -135,8 +146,9 @@ export function generateOpenAPIDocumentFromTRPCRouter<R extends Router<any>>(
   const api: OpenAPIV3.Document = {
     openapi: '3.0.0',
     info: {
-      title: 'tRPC HTTP-RPC',
-      version: '',
+      title: options.title ?? 'tRPC HTTP-RPC',
+      version: options.version ?? '',
+      ...(options.description ? { description: options.description } : {}),
     },
     paths,
   }
@@ -169,6 +181,9 @@ function asZodType(input: unknown) {
  * @public
  */
 export interface GenerateOpenAPIDocumentOptions<M extends OperationMeta> {
+  title?: string
+  version?: string
+  description?: string
   pathPrefix?: string
   processOperation?: (
     operation: OpenAPIV3.OperationObject,
@@ -179,6 +194,37 @@ export interface GenerateOpenAPIDocumentOptions<M extends OperationMeta> {
 function toJsonSchema(input: ZodType) {
   const { $schema, ...output } = zodToJsonSchema(input)
   return output
+}
+
+function generateExample(schema: Record<string, unknown>): unknown {
+  if (schema.example !== undefined) return schema.example
+  if (schema.default !== undefined) return schema.default
+  if (schema.enum && Array.isArray(schema.enum) && schema.enum.length > 0)
+    return schema.enum[0]
+
+  switch (schema.type) {
+    case 'string':
+      return 'string'
+    case 'number':
+    case 'integer':
+      return 0
+    case 'boolean':
+      return true
+    case 'array':
+      return []
+    case 'object': {
+      if (!schema.properties) return {}
+      const result: Record<string, unknown> = {}
+      for (const [key, prop] of Object.entries(
+        schema.properties as Record<string, Record<string, unknown>>,
+      )) {
+        result[key] = generateExample(prop)
+      }
+      return result
+    }
+    default:
+      return undefined
+  }
 }
 
 type MetaOf<R extends Router<any>> = R extends Router<RouterDef<infer D, any>>
