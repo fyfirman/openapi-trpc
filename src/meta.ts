@@ -8,6 +8,7 @@ export const allowedOperationKeys = defineKeys([
   'deprecated',
   'description',
   'externalDocs',
+  'security',
   'summary',
   'tags',
 ])
